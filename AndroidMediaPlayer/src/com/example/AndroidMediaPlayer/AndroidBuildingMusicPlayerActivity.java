@@ -75,9 +75,11 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 		// Getting all songs list
 		songsList = songManager.getPlayList();
 		
-		// By default play first song
+		// By default show the first song but stop immediately
 		playSong(0);
-				
+        mp.stop();
+        btnPlay.setImageResource(R.drawable.btn_play);
+
 		/**
 		 * Play button click event
 		 * plays a song and changes button to pause image
@@ -247,6 +249,7 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(getApplicationContext(), PlayListActivity2.class);
+                i.putExtra("songIndex", currentSongIndex);
 				startActivityForResult(i, 100);			
 			}
 		});

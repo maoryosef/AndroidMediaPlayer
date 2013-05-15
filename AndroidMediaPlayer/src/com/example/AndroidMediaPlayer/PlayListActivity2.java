@@ -25,7 +25,7 @@ public class PlayListActivity2 extends ListActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.playlist);
+        setContentView(R.layout.playlist2);
 
         Log.d(LOG_TAG, "OnCreate");
 
@@ -39,6 +39,8 @@ public class PlayListActivity2 extends ListActivity {
         setListAdapter(adapter);
 
         ListView lv = getListView();
+
+        int currentSongIndex = getIntent().getExtras().getInt("songIndex");
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
