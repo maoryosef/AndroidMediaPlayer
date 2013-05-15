@@ -52,7 +52,8 @@ public class PlayListActivity2 extends ListActivity {
                 in.putExtra("songIndex", songIndex);
                 setResult(100, in);
                 // Closing PlayListView
-                finish();            }
+                finish();
+            }
         });
 
     }

@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -276,11 +277,11 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 		// Play song
 		try {
         	mp.reset();
-			mp.setDataSource(songsList.get(songIndex).get("songPath"));
+			mp.setDataSource(songsList.get(songIndex).get(MediaStore.Audio.Media.DATA));
 			mp.prepare();
 			mp.start();
 			// Displaying Song title
-			String songTitle = songsList.get(songIndex).get("songTitle");
+			String songTitle = songsList.get(songIndex).get(MediaStore.Audio.Media.TITLE);
         	songTitleLabel.setText(songTitle);
 			
         	// Changing Button Image to pause image
