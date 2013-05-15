@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:gravity="center"
+              android:background="@drawable/list_selector"
+              android:padding="5dp">
+
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:shrinkColumns="1"
+            android:stretchColumns="2" >
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <Space
+                    android:layout_width="20px"
+                    android:layout_height="20px"
+                    android:id="@+id/space"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artist name"
+                    android:id="@+id/artistName" android:textSize="12dip"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Song Tilte"
+                    android:id="@+id/songTitle" android:textStyle="bold" android:textSize="16dip"
+                    android:singleLine="true"/>
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="00:00"
+                    android:id="@+id/duration" android:layout_gravity="right" android:textSize="10dip"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
