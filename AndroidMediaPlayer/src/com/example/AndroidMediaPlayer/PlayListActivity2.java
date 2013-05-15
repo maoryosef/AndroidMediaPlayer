@@ -75,7 +75,7 @@ public class PlayListActivity2 extends ListActivity {
                 AlertDialog.Builder dlgAlert = new AlertDialog.Builder(PlayListActivity2.this);
 
                 dlgAlert.setTitle("click test");
-                dlgAlert.setMessage("Song index = " + songIndex);
+                dlgAlert.setMessage("Song index : " + songIndex);
                 dlgAlert.setPositiveButton("OK", null);
                 dlgAlert.setCancelable(true);
                 dlgAlert.create().show();
