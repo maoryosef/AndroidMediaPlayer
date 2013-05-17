@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -40,7 +41,10 @@ public class SongsManager2 {
                 MediaStore.Audio.Media.TITLE,
                 MediaStore.Audio.Media.DATA,
                 MediaStore.Audio.Media.DISPLAY_NAME,
-                MediaStore.Audio.Media.DURATION
+                MediaStore.Audio.Media.DURATION,
+                MediaStore.Audio.Media.ALBUM,
+                MediaStore.Audio.Media.ALBUM_ID,
+                MediaStore.Audio.Media.ALBUM_KEY
         };
 
         Cursor songsCursor = m_ParentActivity.managedQuery(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -53,6 +57,7 @@ public class SongsManager2 {
 
             HashMap<String, String> song = new HashMap<String, String>();
             for (int i = 0; i < count; i++) {
+                Log.d(LOG_TAG, songsCursor.getColumnName(i) + " = " + songsCursor.getString(i));
                 if (songsCursor.getColumnName(i).equals(MediaStore.Audio.Media.DURATION)) {
                     Long duration = Long.parseLong(songsCursor.getString(i));
                     String durationString = Utilities.getDurationStringFromMilliseconds(duration);

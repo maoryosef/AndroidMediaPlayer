@@ -33,12 +33,40 @@ public class PlayListActivity2 extends ListActivity {
 
         m_SongsListData = songsManager.getPlayList();
 
+        //TODO create song item class
+        //TODO create song item adapter
         ListAdapter adapter = new SimpleAdapter(this, m_SongsListData, R.layout.playlist_item2,
                 new String[] {MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST, MediaStore.Audio.Media.DURATION}, new int[] { R.id.songTitle, R.id.artistName, R.id.duration });
+
 
         setListAdapter(adapter);
 
         ListView lv = getListView();
+
+        int currentSongIndex = getIntent().getExtras().getInt("songIndex");
+
+        /*m_SongsListData.get(currentSongIndex).put(MediaStore.Audio.Media.TITLE, "YES");
+
+        ((BaseAdapter) lv.getAdapter()).notifyDataSetChanged();*/
+
+/*        View view = adapter.getView(currentSongIndex, null, lv);
+
+        if (view == null) {
+            Log.d(LOG_TAG, "FAIL!!");
+        } else {
+            Log.d(LOG_TAG, "Success!!");
+            TextView tv = (TextView)view.findViewById(R.id.songTitle);
+            Log.d(LOG_TAG, tv.getText().toString());
+            tv.setText("bla bla");
+
+            tv = (TextView)view.findViewById(R.id.songTitle);
+            Log.d(LOG_TAG, tv.getText().toString());
+
+            view = adapter.getView(currentSongIndex, view, lv);
+
+            tv = (TextView)view.findViewById(R.id.songTitle);
+            Log.d(LOG_TAG, tv.getText().toString());
+        }*/
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -57,6 +85,7 @@ public class PlayListActivity2 extends ListActivity {
         });
 
     }
+
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

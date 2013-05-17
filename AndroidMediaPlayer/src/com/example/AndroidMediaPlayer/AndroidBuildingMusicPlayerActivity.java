@@ -12,6 +12,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -49,7 +50,8 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player);
-		
+
+        Log.d("main", "creating");
 		// All player buttons
 		btnPlay = (ImageButton) findViewById(R.id.btnPlay);
 		btnForward = (ImageButton) findViewById(R.id.btnForward);
