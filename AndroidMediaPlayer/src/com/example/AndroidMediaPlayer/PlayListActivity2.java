@@ -40,8 +40,6 @@ public class PlayListActivity2 extends ListActivity {
 
         ListView lv = getListView();
 
-        int currentSongIndex = getIntent().getExtras().getInt("songIndex");
-
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -59,4 +57,17 @@ public class PlayListActivity2 extends ListActivity {
         });
 
     }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        /*int currentSongIndex = getIntent().getExtras().getInt("songIndex");
+        ListView lv = getListView();
+        View view = lv.getChildAt(currentSongIndex);
+        TextView tv = (TextView)view.findViewById(R.id.songTitle);
+        tv.setTextColor(4);*/
+    }
+
+
 }
