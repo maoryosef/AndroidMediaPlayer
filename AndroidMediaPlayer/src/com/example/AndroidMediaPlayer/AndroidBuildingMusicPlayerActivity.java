@@ -31,6 +31,7 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 	private ImageButton btnShuffle;
 	private SeekBar songProgressBar;
 	private TextView songTitleLabel;
+    private TextView artistNameLabel;
 	private TextView songCurrentDurationLabel;
 	private TextView songTotalDurationLabel;
 	// Media Player
@@ -44,9 +45,9 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 	private boolean isShuffle = false;
 	private boolean isRepeat = false;
 	private ArrayList<HashMap<String, String>> songsList = new ArrayList<HashMap<String, String>>();
-	
 
-	@Override
+
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.player);
@@ -63,6 +64,7 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 		btnShuffle = (ImageButton) findViewById(R.id.btnShuffle);
 		songProgressBar = (SeekBar) findViewById(R.id.songProgressBar);
 		songTitleLabel = (TextView) findViewById(R.id.songTitle);
+		artistNameLabel = (TextView) findViewById(R.id.artistName);
 		songCurrentDurationLabel = (TextView) findViewById(R.id.songCurrentDurationLabel);
 		songTotalDurationLabel = (TextView) findViewById(R.id.songTotalDurationLabel);
 		
@@ -287,8 +289,10 @@ public class AndroidBuildingMusicPlayerActivity extends Activity implements OnCo
 			mp.start();
 			// Displaying Song title
 			String songTitle = songsList.get(songIndex).get(MediaStore.Audio.Media.TITLE);
+			String artistName = songsList.get(songIndex).get(MediaStore.Audio.Media.ARTIST);
         	songTitleLabel.setText(songTitle);
-			
+        	artistNameLabel.setText(artistName);
+
         	// Changing Button Image to pause image
 			btnPlay.setImageResource(R.drawable.btn_pause);
 			

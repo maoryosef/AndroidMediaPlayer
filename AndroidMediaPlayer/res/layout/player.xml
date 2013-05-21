@@ -15,20 +15,31 @@
         android:paddingRight="5dp">
         
         <!-- Song Title -->
-        <TextView 
-            android:id="@+id/songTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="#04b3d2"
-            android:textSize="16dp"
-            android:paddingLeft="10dp"
-            android:textStyle="bold"
-            android:text="The Good, The Bad And The Ugly"
-            android:layout_marginTop="10dp"/>"
-        
+        "
+
         <!-- Playlist button -->
-        <ImageButton 
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_weight="1">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artist name"
+                    android:id="@+id/artistName" android:textSize="12dp" android:layout_marginTop="2dp"/>
+            <TextView
+                android:id="@+id/songTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:textColor="#04b3d2"
+                android:textSize="16dp"
+                android:paddingLeft="10dp"
+                android:textStyle="bold"
+                android:text="Song Title"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+        <ImageButton
             android:id="@+id/btnPlaylist"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
