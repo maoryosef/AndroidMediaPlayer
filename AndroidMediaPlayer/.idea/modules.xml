@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidMediaPlayer.iml" filepath="$PROJECT_DIR$/AndroidMediaPlayer.iml" />
+      <module fileurl="file://$USER_HOME$/Downloads/JakeWharton-ActionBarSherlock-4.3.1-0-gc0d437c/JakeWharton-ActionBarSherlock-071a61c/actionbarsherlock/target/generated-sources/generated-sources.iml" filepath="$USER_HOME$/Downloads/JakeWharton-ActionBarSherlock-4.3.1-0-gc0d437c/JakeWharton-ActionBarSherlock-071a61c/actionbarsherlock/target/generated-sources/generated-sources.iml" />
     </modules>
   </component>
 </project>
