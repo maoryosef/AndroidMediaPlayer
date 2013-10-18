@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleRecorder</string>
+    <string name="buttonRecord"><![CDATA[Record]]></string>
+    <string name="buttonPlay"><![CDATA[Play]]></string>
+</resources>
