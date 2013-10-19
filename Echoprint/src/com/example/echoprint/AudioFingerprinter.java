@@ -64,8 +64,10 @@ public class AudioFingerprinter implements Runnable
     private final String ECHO_PRINT_API_KEY = "TKS97OD2F2RMRD6RT";
     private final String SERVER_URL = "http://developer.echonest.com/api/v4/song/identify?api_key=%s&code=%s=&version=4.12";
 
+    private final int FREQUENCY = 44100;
+    //private final int FREQUENCY = 22050;
     //private final int FREQUENCY = 11025;
-    private final int FREQUENCY = 8000;
+    //private final int FREQUENCY = 8000;
     private final int CHANNEL = AudioFormat.CHANNEL_IN_MONO;
     private final int ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
@@ -200,11 +202,14 @@ public class AudioFingerprinter implements Runnable
                     Log.d("Fingerprinter", "Creating AudioTrack");
 
                     AudioTrack player = new AudioTrack(AudioManager.STREAM_MUSIC,
-                            this.FREQUENCY, AudioFormat.CHANNEL_IN_STEREO, this.ENCODING,
-                            this.FREQUENCY, AudioTrack.MODE_STATIC);
+                            this.FREQUENCY, AudioFormat.CHANNEL_CONFIGURATION_MONO, this.ENCODING,
+                            minBufferSize, AudioTrack.MODE_STREAM);
 
                     Log.d("Fingerprinter", "Replaying recording");
+                    player.play();
                     player.write(audioData, 0, audioData.length);
+                    player.stop();
+                    player.release();
 
                     // create an echoprint codegen wrapper and get the code
                     time = System.currentTimeMillis();
