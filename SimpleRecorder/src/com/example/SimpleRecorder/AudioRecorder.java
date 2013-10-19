@@ -7,7 +7,7 @@ package com.example.SimpleRecorder;
  * Time: 17:03
  */
 public interface AudioRecorder {
-    public void start();
+    public void record();
     public void stop();
     public void play();
     public String getFileName();

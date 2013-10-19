@@ -44,7 +44,7 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
                         mRecorder = new AudioRecorderAltImpl(RecorderActivity.this);
                     }
 
-                    mRecorder.start();
+                    mRecorder.record();
                 }
             }
         });

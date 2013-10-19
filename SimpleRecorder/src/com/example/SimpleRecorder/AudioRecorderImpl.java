@@ -31,7 +31,7 @@ public class AudioRecorderImpl implements AudioRecorder, Runnable {
     }
 
     @Override
-    public void start() {
+    public void record() {
         if (!mInAction) {
             Log.d("AudioRecorderImpl", "Creating new thread...");
             mThread = new Thread(this);

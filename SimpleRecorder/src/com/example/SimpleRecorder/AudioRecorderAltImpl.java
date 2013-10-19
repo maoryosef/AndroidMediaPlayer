@@ -22,13 +22,12 @@ public class AudioRecorderAltImpl implements AudioRecorder{
     private String mFileName;
     private AudioTrack mAudioTrackPlayer;
 
-    private static final int RECORDER_SAMPLERATE = 11025;
+    private static final int SAMPLE_RATE = 11025;
     private static final int RECORDER_CHANNELS = AudioFormat.CHANNEL_IN_MONO;
     private static final int PLAYER_CHANNELS = AudioFormat.CHANNEL_CONFIGURATION_MONO;
     private static final int RECORDER_AUDIO_ENCODING = AudioFormat.ENCODING_PCM_16BIT;
 
-    private int mBufferElements2Rec = 1024; // want to play 2048 (2K) since 2 bytes we use only 1024
-    private int mBytesPerElement = 2; // 2 bytes in 16bit format
+    private int mBufferElements2Rec = 2048;
 
     public String getFileName() {
         return mFileName;
@@ -43,8 +42,8 @@ public class AudioRecorderAltImpl implements AudioRecorder{
     public void startRecording() {
         Log.d("AudioRecorderAltImpl", "Starting to record");
         mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
-                RECORDER_SAMPLERATE, RECORDER_CHANNELS,
-                RECORDER_AUDIO_ENCODING, mBufferElements2Rec * mBytesPerElement);
+                SAMPLE_RATE, RECORDER_CHANNELS,
+                RECORDER_AUDIO_ENCODING, mBufferElements2Rec);
 
         mRecorder.startRecording();
         mInAction = true;
@@ -72,7 +71,8 @@ public class AudioRecorderAltImpl implements AudioRecorder{
     private void writeAudioDataToFile() {
         // Write the output audio in byte
 
-        short sData[] = new short[mBufferElements2Rec];
+        //short sData[] = new short[mBufferElements2Rec];
+        byte bData[] = new byte[mBufferElements2Rec];
 
         FileOutputStream os = null;
         try {
@@ -82,13 +82,11 @@ public class AudioRecorderAltImpl implements AudioRecorder{
         }
 
         while (mInAction) {
-            mRecorder.read(sData, 0, mBufferElements2Rec);
-            Log.d("AudioRecorderAltImpl", "Short wirting to file" + sData.toString());
+            mRecorder.read(bData, 0, mBufferElements2Rec);
+
+            Log.d("AudioRecorderAltImpl", "Bytes writing to file" + bData.toString());
             try {
-                // // writes the data to file from buffer
-                // // stores the voice buffer
-                byte bData[] = short2byte(sData);
-                os.write(bData, 0, mBufferElements2Rec * mBytesPerElement);
+                os.write(bData, 0,  mBufferElements2Rec);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -101,7 +99,7 @@ public class AudioRecorderAltImpl implements AudioRecorder{
     }
 
     @Override
-    public void start() {
+    public void record() {
         if (!mInAction) {
             startRecording();
             doOnStartRecord();
@@ -200,10 +198,10 @@ public class AudioRecorderAltImpl implements AudioRecorder{
             return;
         }
 
-        int intSize = android.media.AudioTrack.getMinBufferSize(RECORDER_SAMPLERATE, PLAYER_CHANNELS,
+        int intSize = android.media.AudioTrack.getMinBufferSize(SAMPLE_RATE, PLAYER_CHANNELS,
                 RECORDER_AUDIO_ENCODING);
 
-        mAudioTrackPlayer = new AudioTrack(AudioManager.STREAM_MUSIC, RECORDER_SAMPLERATE, PLAYER_CHANNELS,
+        mAudioTrackPlayer = new AudioTrack(AudioManager.STREAM_MUSIC, SAMPLE_RATE, PLAYER_CHANNELS,
                 RECORDER_AUDIO_ENCODING, intSize, AudioTrack.MODE_STREAM);
 
 
