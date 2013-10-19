@@ -1,0 +1,148 @@
+JFDML JFormDesigner: "5.1.1.0.120" Java: "1.7.0_10" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+			name: "this"
+			"defaultCloseOperation": 3
+			"title": "Music Retrieval Demo v1.0"
+			"resizable": false
+			add( new FormComponent( "javax.swing.JProgressBar" ) {
+				name: "jProgressBar"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 110
+				"width": 470
+				"height": 20
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabelStatus"
+				"font": new java.awt.Font( "Dialog", 0, 24 )
+				"text": "Status"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"width": 680
+				"height": 60
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButtonRecord"
+				"font": new java.awt.Font( "Dialog", 1, 18 )
+				"text": "Record"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButtonRecordActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 170
+				"y": 70
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButtonPlay"
+				"font": new java.awt.Font( "Dialog", 1, 18 )
+				"text": "Playback"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButtonPlayActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 282
+				"y": 70
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "jComboBoxRecordTime"
+				"font": new java.awt.Font( "Dialog", 1, 18 )
+				"model": new javax.swing.DefaultComboBoxModel {
+					selectedItem: "3 Seconds"
+					addElement( "3 Seconds" )
+					addElement( "5 Seconds" )
+					addElement( "7 Seconds" )
+					addElement( "10 Seconds" )
+					addElement( "15 Seconds" )
+				}
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 70
+				"width": 150
+				"height": 30
+			} )
+			add( new FormComponent( "javax.swing.JList" ) {
+				name: "jListSongs"
+				"font": new java.awt.Font( "Dialog", 1, 16 )
+				"minimumSize": new java.awt.Dimension( 10, 10 )
+				"preferredSize": new java.awt.Dimension( 20, 20 )
+				addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "jListSongsMouseClicked", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 140
+				"width": 680
+				"height": 200
+			} )
+			add( new FormComponent( "javax.swing.JProgressBar" ) {
+				name: "jProgressBarLevel"
+				"orientation": 1
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 510
+				"y": 80
+				"width": 10
+				"height": 50
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabelLevel"
+				"horizontalAlignment": 0
+				"text": "Level"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 490
+				"y": 60
+				"width": 50
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel2"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 690
+				"y": 530
+				"width": 10
+				"height": 10
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "jButtonLoad"
+				"font": new java.awt.Font( "Dialog", 1, 18 )
+				"text": "Load"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "jButtonLoadActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 410
+				"y": 70
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel1"
+				"font": new java.awt.Font( "MS Sans Serif", 0, 18 )
+				"text": "Signal Analysis"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 370
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.FlowLayout ) ) {
+				name: "fftDisplayHolder"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 10
+				"y": 430
+				"width": 680
+				"height": 100
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel3"
+				"font": new java.awt.Font( "MS Sans Serif", 0, 14 )
+				"horizontalAlignment": 0
+				"text": "Recording"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 155
+				"y": 400
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "jLabel4"
+				"font": new java.awt.Font( "MS Sans Serif", 0, 14 )
+				"horizontalAlignment": 0
+				"text": "Original"
+			}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+				"x": 500
+				"y": 400
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"size": new java.awt.Dimension( 703, 546 )
+		} )
+	}
+}

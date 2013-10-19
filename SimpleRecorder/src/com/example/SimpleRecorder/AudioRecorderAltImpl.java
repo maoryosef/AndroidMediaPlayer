@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.*;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +21,7 @@ public class AudioRecorderAltImpl implements AudioRecorder{
     private AudioRecorderListener mListener;
     private AudioRecord mRecorder;
     private String mFileName;
+    private ByteArrayOutputStream  mBytesArray;
     private AudioTrack mAudioTrackPlayer;
 
     private static final int SAMPLE_RATE = 11025;
@@ -49,7 +51,8 @@ public class AudioRecorderAltImpl implements AudioRecorder{
         mInAction = true;
         mRecordingThread = new Thread(new Runnable() {
             public void run() {
-                writeAudioDataToFile();
+               // writeAudioDataToFile();
+                writeAudioDataToMemory();
             }
         }, "AudioRecorder Thread");
 
@@ -93,6 +96,26 @@ public class AudioRecorderAltImpl implements AudioRecorder{
         }
         try {
             os.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void writeAudioDataToMemory() {
+        // Write the output audio in byte
+
+        byte bData[] = new byte[mBufferElements2Rec];
+
+        mBytesArray = new ByteArrayOutputStream();
+
+        while (mInAction) {
+            mRecorder.read(bData, 0, mBufferElements2Rec);
+
+            Log.d("AudioRecorderAltImpl", "Bytes writing to file" + bData.toString());
+            mBytesArray.write(bData, 0,  mBufferElements2Rec);
+        }
+        try {
+            mBytesArray.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -180,7 +203,8 @@ public class AudioRecorderAltImpl implements AudioRecorder{
         mPlayerThread = new Thread(new Runnable() {
             public void run() {
                 try {
-                    playAudioFileViaAudioTrack(AudioRecorderAltImpl.this.getFileName());
+                    //playAudioFileViaAudioTrack(AudioRecorderAltImpl.this.getFileName());
+                    playAudioFromMemoryViaAudioTrack();
                 } catch (IOException e) {
                     Log.e("AudioRecorderImpl", "Player failed", e);
                     doOnError(e);
@@ -189,6 +213,36 @@ public class AudioRecorderAltImpl implements AudioRecorder{
         }, "AudioPlayer Thread");
 
         mPlayerThread.start();
+    }
+
+    private void playAudioFromMemoryViaAudioTrack() throws IOException
+    {
+        int intSize = android.media.AudioTrack.getMinBufferSize(SAMPLE_RATE, PLAYER_CHANNELS,
+                RECORDER_AUDIO_ENCODING);
+
+        mAudioTrackPlayer = new AudioTrack(AudioManager.STREAM_MUSIC, SAMPLE_RATE, PLAYER_CHANNELS,
+                RECORDER_AUDIO_ENCODING, intSize, AudioTrack.MODE_STREAM);
+
+
+        if (mAudioTrackPlayer == null){
+            Log.d("AudioRecorderImpl", "audio track is not initialised ");
+            return;
+        }
+
+        int count = 512 * 1024; // 512 kb
+        //Reading the file..
+        byte[] byteData = null;
+
+        byteData = mBytesArray.toByteArray();
+
+        mAudioTrackPlayer.play();
+        mAudioTrackPlayer.write(byteData,0, byteData.length);
+
+        mAudioTrackPlayer.stop();
+        mAudioTrackPlayer.release();
+        mAudioTrackPlayer = null;
+
+        doOnFinishPlayback();
     }
 
     private void playAudioFileViaAudioTrack(String filePath) throws IOException
