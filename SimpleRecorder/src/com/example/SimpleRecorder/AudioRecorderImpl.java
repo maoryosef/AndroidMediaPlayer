@@ -125,6 +125,11 @@ public class AudioRecorderImpl implements AudioRecorder, Runnable {
     }
 
     @Override
+    public String getFileName() {
+        return mFileName;
+    }
+
+    @Override
     public void run() {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);

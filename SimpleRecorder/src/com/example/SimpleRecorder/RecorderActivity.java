@@ -13,7 +13,8 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
     Button mRecordButton;
     Button mPlayButton;
     TextView mTextView;
-    boolean mRecording = false;
+    boolean mIsRecording = false;
+    boolean mIsPlaying = false;
     AudioRecorder mRecorder;
     /**
      * Called when the activity is first created.
@@ -34,13 +35,13 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
                 Log.d("RecorderActivity", "mRecordButton Clicked");
                 RecorderActivity.this.mRecordButton.setText("...");
                 // Perform action on click
-                if (mRecording) {
+                if (mIsRecording) {
                     Log.d("RecorderActivity", "Stopping recorder");
                     mRecorder.stop();
                 } else {
                     Log.d("RecorderActivity", "Starting recorder");
                     if (mRecorder == null) {
-                        mRecorder = new AudioRecorderImpl(RecorderActivity.this);
+                        mRecorder = new AudioRecorderAltImpl(RecorderActivity.this);
                     }
 
                     mRecorder.start();
@@ -52,8 +53,13 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
             public void onClick(View v) {
                 Log.d("RecorderActivity", "mPlayButton Clicked");
                 RecorderActivity.this.mPlayButton.setText("...");
-
-                mRecorder.play();
+                if (mIsPlaying) {
+                    Log.d("RecorderActivity", "Stopping playback");
+                    mRecorder.stop();
+                } else {
+                    Log.d("RecorderActivity", "Starting playback");
+                    mRecorder.play();
+                }
             }
         });
     }
@@ -62,7 +68,7 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
     public void onStartingRecord() {
         mRecordButton.setText("Stop");
         appendText(mTextView, "Starting to record");
-        mRecording = true;
+        mIsRecording = true;
     }
 
     private void appendText(TextView iTextView, String iText) {
@@ -81,16 +87,19 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
     @Override
     public void onFinishedRecord() {
         appendText(mTextView, "Done recording...");
+        appendText(mTextView, mRecorder.getFileName());
         mPlayButton.setEnabled(true);
         mRecordButton.setText(R.string.buttonRecord);
-        mRecording = false;
+        mIsRecording = false;
     }
 
     @Override
     public void onStartingPlayback() {
         appendText(mTextView, "Starting playback...");
-        mPlayButton.setEnabled(false);
+        mPlayButton.setEnabled(true);
         mRecordButton.setEnabled(false);
+        mPlayButton.setText("Stop");
+        mIsPlaying = true;
     }
 
     @Override
@@ -100,6 +109,7 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
         mPlayButton.setText(R.string.buttonPlay);
         mRecordButton.setEnabled(true);
         mPlayButton.setEnabled(true);
+        mIsPlaying = false;
     }
 
     @Override
@@ -107,5 +117,7 @@ public class RecorderActivity extends Activity implements AudioRecorderListener{
         appendText(mTextView, "Error: " + e.getMessage());
         mRecordButton.setText(R.string.buttonRecord);
         mRecordButton.setEnabled(true);
+        mIsPlaying = false;
+        mIsRecording = false;
     }
 }

@@ -10,4 +10,5 @@ public interface AudioRecorder {
     public void start();
     public void stop();
     public void play();
+    public String getFileName();
 }
