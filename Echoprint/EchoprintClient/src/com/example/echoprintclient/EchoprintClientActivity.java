@@ -40,7 +40,7 @@ public class EchoprintClientActivity extends Activity implements AudioFingerprin
                     if(fingerprinter == null)
                         fingerprinter = new AudioFingerprinter(EchoprintClientActivity.this);
 
-                    fingerprinter.fingerprint(15);
+                    fingerprinter.fingerprint(20);
                 }
             }
         });

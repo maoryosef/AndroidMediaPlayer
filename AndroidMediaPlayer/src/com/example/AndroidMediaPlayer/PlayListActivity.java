@@ -48,7 +48,7 @@ public class PlayListActivity extends ListActivity {
             songsListData.add(song);
         }
 
-        ListAdapter adapter = new SimpleAdapter(this, songsListData, R.layout.playlist_item,
+        ListAdapter adapter = new SimpleAdapter(this, songsListData, R.layout.playlist_item2,
                                                 new String[] {"songTitle"}, new int[] { R.id.songTitle });
 
         setListAdapter(adapter);
